@@ -3,7 +3,7 @@ const {hashPassword , comparePassword} = require('../helpers/user')
 const test = (req,res) => {
     res.json('test is working')
 }
-
+//Register endpoint
 const registerUser = async (req,res) => {
     try {
         const {name , email ,  password} = req.body
@@ -37,7 +37,32 @@ const registerUser = async (req,res) => {
     }
 }
 
+//Login Endpoint 
+
+const loginUser = async (req,res) => {
+     try {
+        const {email ,  password} = req.body
+        
+        const user = await User.findOne({email})
+
+        if(!user){
+            res.json({
+                error:'User not found'
+            })
+        }
+
+        const match = await comparePassword(password,user.password)
+
+        if(match){
+            res.json('password match')
+        }
+     } catch (error) {
+        console.log(error)
+     }
+}
+
 module.exports = {
     test,
-    registerUser
+    registerUser,
+    loginUser
 }

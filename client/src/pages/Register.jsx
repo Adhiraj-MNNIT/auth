@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import "../../css/Register.css"; // Import your CSS file
 
 export default function Register() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default function Register() {
         toast.error(data.error);
       } else {
         setData({});
-        toast.success("Login Successful , Welcome!");
+        toast.success("Registration Successful, Welcome!");
         navigate("/login");
       }
     } catch (error) {
@@ -35,26 +36,26 @@ export default function Register() {
     }
   };
   return (
-    <div>
-      <form onSubmit={registerUser}>
-        <label>Name :</label>
+    <div className="register-container">
+      <form className="register-form" onSubmit={registerUser}>
+        <label>Name:</label>
         <input
           type="text"
-          placeholder="enter name ..."
+          placeholder="Enter name..."
           value={data.name}
           onChange={(e) => setData({ ...data, name: e.target.value })}
         />
-        <label>Email :</label>
+        <label>Email:</label>
         <input
           type="email"
-          placeholder="enter email ..."
+          placeholder="Enter email..."
           value={data.email}
           onChange={(e) => setData({ ...data, email: e.target.value })}
         />
-        <label>Password :</label>
+        <label>Password:</label>
         <input
           type="password"
-          placeholder="enter Password ..."
+          placeholder="Enter password..."
           value={data.password}
           onChange={(e) => setData({ ...data, password: e.target.value })}
         />
